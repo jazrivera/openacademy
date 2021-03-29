@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="report_course_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <h3>Course: <t t-esc="doc.name" /></h3>
+                <table width="100%">
+                    <tr>
+                        <td>Responsible: </td>
+                        <td><t t-esc="doc.responsible_id.name" /></td>
+                    </tr>
+                    <tr>
+                        <td>Description: </td>
+                        <td><t t-esc="doc.description" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><hr /></td>
+                    </tr>
+                    <tr>
+                        <td>Sessions:</td>
+                        <td>
+                            <t t-foreach="doc.session_ids" t-as="session">
+                                <tr>
+                                    <td style="font-size: 12px;"><t t-esc="session.name" /></td>
+                                    <td style="font-size: 12px;">Professor: <t t-esc="session.instructor_id.name" /></td>
+                                    <td style="font-size: 12px;">
+                                        Session status: 
+                                        <t t-if="session.is_done">Finished</t>
+                                        <t t-if="not session.is_done">Ongoing</t>
+                                    </td>
+                                </tr>
+                            </t>
+                        </td>
+                    </tr>
+                </table>
+            </t>
+        </t>
+    </template>
+
+</odoo>
